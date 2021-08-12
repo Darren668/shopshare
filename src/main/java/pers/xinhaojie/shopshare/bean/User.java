@@ -1,12 +1,11 @@
 package pers.xinhaojie.shopshare.bean;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import jdk.nashorn.internal.objects.annotations.Constructor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 /**
  * @author xin haojie
@@ -17,10 +16,16 @@ import java.util.List;
 @TableName("tbl_user")
 public class User {
 
-    String email;
-    String password;
-    String name;
-    byte[] orderId;
-    char gender;
+    private Integer id;
+    @NotBlank(message = "username required")
+    private String username;
+    @NotBlank(message = "password required")
+    private String password;
+    @NotBlank(message = "email required")
+    private String email;
+
+    private Byte isActive = 1;
+    private Date createTime;
+    private Date updateTime;
 
 }
