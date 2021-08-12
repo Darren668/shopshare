@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>login in</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login_util.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login_main.css}">
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body>
+<div class="limiter" th:style="'background: url(/images/login_cart.jpg);'">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title">
+                <span class="login100-form-title-1">Welcome to shopshare</span>
+            </div>
+            <div class="row ">
+                <div class="col-md-6 text-center">
+                    <a th:href="@{/loginPage}"><button class="rounded btn-large btn-success"><h2>Login</h2></button></a>
+                </div>
+                <div class="col-md-6 text-center">
+                    <a th:href="@{/registerPage}"><button class="rounded btn-large btn-info"><h2>Register</h2></button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/login_main.js}"></script>
+
+
+</body>
+
+</html>

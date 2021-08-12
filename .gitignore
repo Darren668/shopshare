@@ -1,0 +1,7 @@
+HELP.md
+### compile files ###
+target/
+
+### IntelliJ IDEA ###
+.idea/
+shopshare.iml
