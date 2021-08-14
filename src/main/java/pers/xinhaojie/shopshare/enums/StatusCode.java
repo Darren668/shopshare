@@ -9,16 +9,20 @@ public enum StatusCode {
 
     Success(200,"Success"),
     Fail(404,"Failure"),
-    InvalidParams(400,"invalid parameters"),
+    InvalidParams(400,"Invalid parameters"),
 
-    UserNamePasswordNotBlank(4001,"Username and password required"),
-    AccessTokenNotBlank(4002,"AccessToken required"),
+    RegisterInformationNotBlank(4001,"Username/password/email required"),
+    UsernamePasswordNotBlank(4002,"Username and password required"),
+    AccessTokenNotBlank(4003,"AccessToken required"),
 
-    TokenValidateExpireToken(4003,"Token expired"),
-    TokenValidateCheckFail(4004,"Token check not pass"),
+    EmailNotExisted(4049, "Email does not existed"),
+    EmailExisted(4050, "Email has been used"),
+    WrongPassword(4051, "Wrong password"),
 
-    AccessTokenNotExist(4005,"Token did not exist, please login again"),
-    AccessTokenInvalidate(4006,"Invalid Token"),
+    TokenValidateExpireToken(4100,"Token expired"),
+    TokenValidateCheckFail(4101,"Token check not pass"),
+    AccessTokenNotExist(4200,"Token did not exist, please login again"),
+    AccessTokenInvalidate(42001,"Invalid Token"),
 
 
     LoginFail(5000,"Login failed！"),

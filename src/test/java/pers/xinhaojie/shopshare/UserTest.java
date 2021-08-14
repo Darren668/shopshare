@@ -4,13 +4,17 @@ import jdk.nashorn.internal.runtime.ScriptRuntime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import pers.xinhaojie.shopshare.entity.User;
+import pers.xinhaojie.shopshare.enums.ConstantValue;
 import pers.xinhaojie.shopshare.service.UserService;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author xin haojie
@@ -25,6 +29,9 @@ public class UserTest {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
 
     @Test
     public void insertUser(){
@@ -46,5 +53,12 @@ public class UserTest {
         System.out.println(user);
         Timestamp createTime = user.getCreateTime();
         System.out.println(createTime);
+    }
+
+    @Test
+    public void testRedis(){
+        //store token in redis and set the expire time
+        ValueOperations<String, String> redisOperation = stringRedisTemplate.opsForValue();
+        redisOperation.set(ConstantValue.JWT_TOKEN_REDIS_KEY_PREFIX + 1, "token", ConstantValue.ACCESS_TOKEN_EXPIRE, TimeUnit.MILLISECONDS);
     }
 }

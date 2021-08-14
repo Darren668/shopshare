@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import pers.xinhaojie.shopshare.enums.StatusCode;
 
+import java.io.Serializable;
+
 /**
  * unified the response data model
  * @author xin haojie
@@ -13,7 +15,7 @@ import pers.xinhaojie.shopshare.enums.StatusCode;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseData <T>{
+public class ResponseData <T> implements Serializable {
     private Integer code;
     private String msg;
     private T data;

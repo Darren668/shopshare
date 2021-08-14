@@ -33,4 +33,11 @@ public class ResponseServiceImpl implements ResponseService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void setKeyValueInHeader(HttpServletResponse response, String key, String value) {
+        response.setHeader(key, value);
+    }
+
+
 }
