@@ -51,12 +51,12 @@ public class JwtAndRedisUtil {
         return builder.compact();
     }
 
-    //verify token
-    public static Claims resolveAndVerifyToken(String accessToken) throws Exception {
+    //parse and get the real resource of token
+    public static Claims getTokenClaims(String accessToken) throws Exception {
         Claims claims = null;
         try {
             //resolve and get the body of jwt token
-            claims = parseJWT(accessToken);
+            claims = parseTokenWithJwt(accessToken);
         } catch (Exception e) {
             throw new RuntimeException(StatusCode.TokenValidateCheckFail.getMsg());
         }
@@ -64,8 +64,8 @@ public class JwtAndRedisUtil {
         return claims;
     }
 
-    //resolve
-    public static Claims parseJWT(String accessToken) throws Exception {
+    //parse jwt token
+    public static Claims parseTokenWithJwt(String accessToken) throws Exception {
         SecretKey key = createSecretKey();
         return Jwts.parser().setSigningKey(key).parseClaimsJws(accessToken).getBody();
     }

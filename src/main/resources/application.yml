@@ -30,9 +30,19 @@ spring:
         login-password: admin
         reset-enable: false
         login-username: admin
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  redis:
+    host: localhost
+    port: 6379
+    password:
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 
 

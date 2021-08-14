@@ -10,8 +10,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class LoginConfig implements WebMvcConfigurer {
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/main.html");
-    }
+    //防止后退或者刷新导致重新提交表单
+    //    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/main.html");
+//    }
 }

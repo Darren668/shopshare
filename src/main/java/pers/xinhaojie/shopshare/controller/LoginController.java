@@ -1,54 +1,58 @@
 package pers.xinhaojie.shopshare.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pers.xinhaojie.shopshare.bean.User;
-import pers.xinhaojie.shopshare.service.LoginService;
-
-import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import pers.xinhaojie.shopshare.enums.StatusCode;
+import pers.xinhaojie.shopshare.response.ResponseData;
+import pers.xinhaojie.shopshare.service.TokenService;
+import pers.xinhaojie.shopshare.service.UserService;
 
 /**
  * @author xin haojie
  * @create 2021-07-05-8:44
  */
-@Controller
+@RestController
+@RequestMapping(value = "login")
 public class LoginController {
 
     @Autowired
-    LoginService loginService;
-    /**
-     * redirect to the login in page first
-     * */
-    @GetMapping(value = {"/loginPage"})
-    public String toLogin(){
-        return "login";
+    UserService userService;
+
+    @Autowired
+    TokenService tokenService;
+
+    //login with email and password
+    @RequestMapping(value = "email/password", method = RequestMethod.POST)
+    public ResponseData<Object> login(@RequestParam String email, @RequestParam String password) {
+        if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
+            return new ResponseData<>(StatusCode.UserNamePasswordNotBlank);
+        }
+        ResponseData<Object> responseData = new ResponseData<>(StatusCode.Success);
+        try {
+            responseData.setData(tokenService.loginAndCreateToken(email, password));
+        } catch (Exception e) {
+            responseData = new ResponseData<>(StatusCode.Fail);
+        }
+        return responseData;
     }
 
-    @RequestMapping(value = "/login")
-    public String checkLogin(String email, String password, Model model, HttpSession session){
-        QueryWrapper<User> queryByEmail = new QueryWrapper<>();
-        queryByEmail.eq("email",email);
-        User loginUser = loginService.getOne(queryByEmail);
-        if(loginUser != null){
-            //store the user's information in current session
-            session.setAttribute("email",email);
-            session.setAttribute("name",loginUser.getName());
-            if(password.equals(loginUser.getPassword())){
-                return "redirect:/main.html";
-            }else{
-                model.addAttribute("msg","wrong password");
-                return "login";
-            }
+    //get access to the important resources with token
+    @RequestMapping(value = "token", method = RequestMethod.GET)
+    public ResponseData<Object> surfWithToken() {
+        ResponseData<Object> response = new ResponseData<>(StatusCode.Success);
+        try {
+            String warningMsg = "valid token and get access to resources";
+            response.setData(warningMsg);
+
+        } catch (Exception e) {
+            response = new ResponseData<>(StatusCode.Fail.getCode(), e.getMessage());
         }
-        else{
-            //no user in database, require registeration
-            model.addAttribute("msg","no such user, please check email or register first");
-            return "login";
-        }
+        return response;
     }
+
+
 }

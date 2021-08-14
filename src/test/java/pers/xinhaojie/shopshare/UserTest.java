@@ -1,16 +1,16 @@
 package pers.xinhaojie.shopshare;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import jdk.nashorn.internal.runtime.ScriptRuntime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pers.xinhaojie.shopshare.bean.User;
-import pers.xinhaojie.shopshare.service.LoginService;
+import org.springframework.jdbc.core.JdbcTemplate;
+import pers.xinhaojie.shopshare.entity.User;
+import pers.xinhaojie.shopshare.service.UserService;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author xin haojie
@@ -18,56 +18,33 @@ import java.util.List;
  */
 @SpringBootTest
 public class UserTest {
+
     @Autowired
-    LoginService loginService;
-    @Test
-    public void databaseConnectionTest() throws IOException {
-        List<User> list = loginService.list();
-        System.out.println(list.toString());
+    JdbcTemplate jdbcTemplate;
+    //test insert new user into database
 
-    }
-    @Test
-    public void insertUserTest(){
-        User user = new User("lily@qq.com","123456","lili",null,'1');
-        loginService.save(user);
-
-        List<User> newList = loginService.list();
-        System.out.println(newList.toString());
-    }
+    @Autowired
+    UserService userService;
 
     @Test
-    public void updateOrderIdColumn() throws IOException {
-        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+    public void insertUser(){
+        Timestamp createTime = new Timestamp(System.currentTimeMillis());
+        Timestamp updateTime = new Timestamp(System.currentTimeMillis());
 
-        //transfer list to byte array
-        ArrayList<Integer> liliOrders = new ArrayList<>();
-        liliOrders.add(1);
-        liliOrders.add(2);
-        ByteArrayOutputStream byt = new ByteArrayOutputStream();
-        ObjectOutputStream obj = new ObjectOutputStream(byt);
-        obj.writeObject(liliOrders);
-        byte[] orderIdBytes = byt.toByteArray();
-
-        updateWrapper.eq("email","lily@qq.com").set("order_id",orderIdBytes);
-        loginService.update(updateWrapper);
-
-        List<User> newList = loginService.list();
-        System.out.println(newList.toString());
-
-        byt.close();
-        obj.close();
+        User user = new User(1,"bob","123456",
+                "bob@163.com", (byte) 1,createTime,updateTime);
+        //List<Map<String, Object>> maps = jdbcTemplate.queryForList("select * from user");
+        //maps.forEach((e)->{System.out.println(e.toString());});
+        //jdbcTemplate.execute("insert into user values(null,'bob','123456','bob@163.com', '1',null,null);");
+        jdbcTemplate.execute("update `user` set username = 'bob2' where email = 'bob@163.com';");
     }
 
     @Test
-    public void queryOrderIdColumn() throws Exception {
-        User lily = loginService.getOne(new QueryWrapper<User>().eq("email", "lily@qq.com"));
-        byte[] orderId = lily.getOrderId();
-        ByteArrayInputStream byt = new ByteArrayInputStream(orderId);
-        ObjectInputStream obj = new ObjectInputStream(byt);
-        List<Integer> orderList = (List)obj.readObject();
-        System.out.println(orderList.toString());
-
-        byt.close();
-        obj.close();
+    public void testUserService(){
+        List<User> list = userService.list();
+        User user = list.get(0);
+        System.out.println(user);
+        Timestamp createTime = user.getCreateTime();
+        System.out.println(createTime);
     }
 }

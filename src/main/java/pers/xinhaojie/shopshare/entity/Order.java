@@ -1,4 +1,4 @@
-package pers.xinhaojie.shopshare.bean;
+package pers.xinhaojie.shopshare.entity;
 
 /**
  * @author xin haojie

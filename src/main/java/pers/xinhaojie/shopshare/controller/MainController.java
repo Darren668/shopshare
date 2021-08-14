@@ -2,9 +2,8 @@ package pers.xinhaojie.shopshare.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import pers.xinhaojie.shopshare.bean.User;
+import pers.xinhaojie.shopshare.entity.User;
 
 /**
  * @author xin haojie

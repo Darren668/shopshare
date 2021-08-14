@@ -1,10 +1,13 @@
-package pers.xinhaojie.shopshare.bean;
+package pers.xinhaojie.shopshare.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -13,8 +16,8 @@ import java.util.Date;
  */
 @Data
 @AllArgsConstructor
-@TableName("tbl_user")
-public class User {
+@NoArgsConstructor
+public class User implements Serializable {
 
     private Integer id;
     @NotBlank(message = "username required")
@@ -25,7 +28,7 @@ public class User {
     private String email;
 
     private Byte isActive = 1;
-    private Date createTime;
-    private Date updateTime;
+    private Timestamp createTime;
+    private Timestamp updateTime;
 
 }
