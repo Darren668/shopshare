@@ -20,4 +20,10 @@ public class IndexController {
     public String toRegisterPage(){
         return "register";
     }
+
+    //update the password
+    @RequestMapping(value = "forgetPasswordPage")
+    public String updatePassword(){
+        return "updatePass";
+    }
 }

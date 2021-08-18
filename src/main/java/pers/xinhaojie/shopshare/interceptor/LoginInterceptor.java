@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,7 +34,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Autowired
     CheckServiceImpl checkService;
-
+    //判断逻辑写在controller中，提示信息也可以放在model中，解耦合
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
         String email = request.getParameter("email");
@@ -42,15 +43,13 @@ public class LoginInterceptor implements HandlerInterceptor {
         session.setAttribute("email", email);
         if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
             log.info("invalid login information");
-            //ResponseData<Object> responseData = new ResponseData<>(StatusCode.UsernamePasswordNotBlank);
-            //responseService.response(response, responseData);
-            session.setAttribute("msg", StatusCode.UsernamePasswordNotBlank.getMsg());
+            request.setAttribute("msg", StatusCode.UsernamePasswordNotBlank.getMsg());
             return false;
         }
         try {
-            User user = checkService.checkUser(email, password);
+            User user = checkService.checkLoginInformation(email, password);
         } catch (Exception e) {
-            session.setAttribute("msg", e.getMessage());
+            request.setAttribute("msg", e.getMessage());
             return false;
         }
         return true;

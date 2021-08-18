@@ -16,31 +16,31 @@ import pers.xinhaojie.shopshare.interceptor.RegisterInterceptor;
  */
 @Configuration
 public class LoginConfig implements WebMvcConfigurer {
-
-    @Autowired
-    LoginInterceptor loginInterceptor;
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-
-        //set path pattern to intercept
-        // the / is necessary
-        String[] afterLoginPaths = new String[]{"/login"};
-        registry.addInterceptor(loginInterceptor)
-                .addPathPatterns(afterLoginPaths);
-        String[] registerPaths = new String[]{"/register"};
-        registry.addInterceptor(gerRegisterInterceptor())
-                .addPathPatterns(registerPaths);
-    }
-
-    @Bean
-    public LoginTokenInterceptor getLoginTokenInterceptor(){
-        return new LoginTokenInterceptor();
-    }
-
-    @Bean
-    public RegisterInterceptor gerRegisterInterceptor(){
-        return new RegisterInterceptor();
-    }
+//
+//    @Autowired
+//    LoginInterceptor loginInterceptor;
+//
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//
+//        //set path pattern to intercept
+//        // the / is necessary
+//        String[] afterLoginPaths = new String[]{"/login"};
+//        registry.addInterceptor(loginInterceptor)
+//                .addPathPatterns(afterLoginPaths);
+//        String[] registerPaths = new String[]{"/register"};
+//        registry.addInterceptor(gerRegisterInterceptor())
+//                .addPathPatterns(registerPaths);
+//    }
+//
+//    @Bean
+//    public LoginTokenInterceptor getLoginTokenInterceptor(){
+//        return new LoginTokenInterceptor();
+//    }
+//
+//    @Bean
+//    public RegisterInterceptor gerRegisterInterceptor(){
+//        return new RegisterInterceptor();
+//    }
 
 }

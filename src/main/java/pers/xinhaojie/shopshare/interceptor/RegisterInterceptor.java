@@ -43,13 +43,13 @@ public class RegisterInterceptor implements HandlerInterceptor {
             log.info("invalid register information");
             //ResponseData<Object> responseData = new ResponseData<>(StatusCode.RegisterInformationNotBlank);
             //responseService.response(response, responseData);
-            session.setAttribute("msg", StatusCode.RegisterInformationNotBlank.getMsg());
+            request.setAttribute("msg", StatusCode.RegisterInformationNotBlank.getMsg());
             return false;
         }
         //check if there is the same email
         User user = userService.getOne(new QueryWrapper<User>().eq("email", email));
         if(user != null){
-            session.setAttribute("msg", StatusCode.EmailExisted);
+            request.setAttribute("msg", StatusCode.EmailExisted);
             return false;
         }
         return true;

@@ -18,8 +18,8 @@ public class CheckServiceImpl {
     @Autowired
     UserService userService;
 
-    /**check if the username or password is validate*/
-    public User checkUser(String email, String password) throws Exception{
+    /**check if the email or password is validate*/
+    public User checkLoginInformation(String email, String password) throws Exception{
         if(StringUtils.isBlank(email) || StringUtils.isBlank(password)){
             throw new RuntimeException(StatusCode.UsernamePasswordNotBlank.getMsg());
         }
@@ -35,4 +35,29 @@ public class CheckServiceImpl {
         return user;
 
     }
+
+    /**check if the email has been registered*/
+    public void checkRegisterInfo(String username, String email, String password) throws Exception{
+        if(StringUtils.isBlank(email) || StringUtils.isBlank(password) ||StringUtils.isBlank(username)){
+            throw new RuntimeException(StatusCode.RegisterInformationNotBlank.getMsg());
+        }
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("email", email);
+        User user = userService.getOne(queryWrapper);
+        if(user != null){
+            throw new RuntimeException(StatusCode.EmailExisted.getMsg());
+        }
+    }
+
+    /**check if the password is the same */
+    public void checkNewPassword(String email, String password1, String password2) throws Exception{
+        if(StringUtils.isBlank(email) || StringUtils.isBlank(password1) ||StringUtils.isBlank(password2)){
+            throw new RuntimeException(StatusCode.RegisterInformationNotBlank.getMsg());
+        }
+        if(!password1.equals(password2)){
+            throw new RuntimeException(StatusCode.PasswordNotSame.getMsg());
+        }
+    }
+
+
 }

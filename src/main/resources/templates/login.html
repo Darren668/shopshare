@@ -15,14 +15,14 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 <div class="login100-form-title" th:style="'background: url(/images/login_cart.jpg);'">
-                    <span class="login100-form-title-1">login in</span>
+                    <span class="login100-form-title-1">WELCOME TO SHOPSHARE</span>
                 </div>
 
                 <form class="login100-form validate-form" th:action="@{/login}" method="post">
                     <div class="wrap-input100 validate-input m-b-26" data-validate="please input right email">
                         <span class="label-input100">Email</span>
                         <input class="input100" type="text" name="email"
-                               th:value="${session.email}" placeholder="please input your email">
+                               th:value="${email}" placeholder="please input your email">
                         <span class="focus-input100"></span>
                     </div>
 
@@ -31,16 +31,14 @@
                         <input class="input100" type="password" name="password" placeholder="please input password">
                         <span class="focus-input100"></span>
                     </div>
-                    <p style="color: red" th:text="${session.msg}" th:if="${not #strings.isEmpty(session.msg)}"></p>
+                    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
 
                     <div class="flex-sb-m w-full p-b-30">
-                        <div class="contact100-form-checkbox">
-                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                            <label class="label-checkbox100" for="ckb1">Remember me</label>
-                        </div>
-
                         <div>
-                            <a href="#" class="txt1">Forget password?</a>
+                            <a th:href="@{/registerPage}" class="txt1">To register</a>
+                        </div>
+                        <div>
+                            <a th:href="@{/forgetPasswordPage}" class="txt1">Forget password?</a>
                         </div>
                     </div>
                     <div class="container-login100-form-btn">

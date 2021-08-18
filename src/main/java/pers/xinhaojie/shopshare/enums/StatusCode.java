@@ -18,6 +18,7 @@ public enum StatusCode {
     EmailNotExisted(4049, "Email does not existed"),
     EmailExisted(4050, "Email has been used"),
     WrongPassword(4051, "Wrong password"),
+    PasswordNotSame(4052, "Two passwords are different"),
 
     TokenValidateExpireToken(4100,"Token expired"),
     TokenValidateCheckFail(4101,"Token check not pass"),

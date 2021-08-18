@@ -32,7 +32,7 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public String loginAndCreateToken(String email, String password) throws Exception {
-        User user = checkService.checkUser(email, password);
+        User user = checkService.checkLoginInformation(email, password);
         if (user != null) {
             //create token
             String token = JwtAndRedisUtil.createTokenByJwt(user.getId().toString(), email);

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>main page</title>
 </head>
 <body>
-<div><h1>Hello, this is main page</h1></div>
+<div><h3>[[${session.user.getId()}]]</h3></div>
+<div><h3>[[${session.user.getUsername()}]]</h3></div>
+<div><h3>[[${session.user.getEmail()}]]</h3></div>
 </body>
 </html>
