@@ -13,7 +13,9 @@ public class ConstantValue {
     public static final String TOKEN_ISSUER="Darren";
 
     //token expire time：
-    public static final Long ACCESS_TOKEN_EXPIRE=60000L;
+    public static final Long ACCESS_TOKEN_EXPIRE=3600L;
+    public static final Integer SESSION_EXPIRE_TIME = 3600;
+    public static final Integer COOKIE_EXPIRE_TIME = 3600;
 
     //token authorized key
     public static final String TOKEN_AUTH_KEY="e2bd6cee47e0402db80862a09ff4dfd6";
@@ -21,5 +23,4 @@ public class ConstantValue {
     //prefix of redis key for token
     public static final String JWT_TOKEN_REDIS_KEY_PREFIX="UserAuth:JWT:Key:";
 
-    public static final Integer SESSION_EXPIRE_TIME = 3600;
 }

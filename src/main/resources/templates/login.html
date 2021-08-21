@@ -31,14 +31,15 @@
                         <input class="input100" type="password" name="password" placeholder="please input password">
                         <span class="focus-input100"></span>
                     </div>
-                    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+                    <p style="color: green" th:if="${session.tokenMsg} != null" th:text="${session.tokenMsg}"></p>
+                    <p style="color: red" th:if="${msg} != null" th:text="${msg}" ></p>
 
                     <div class="flex-sb-m w-full p-b-30">
                         <div>
                             <a th:href="@{/registerPage}" class="txt1">To register</a>
                         </div>
                         <div>
-                            <a th:href="@{/forgetPasswordPage}" class="txt1">Forget password?</a>
+                            <a th:href="@{/updatePassPage}" class="txt1">Forget password?</a>
                         </div>
                     </div>
                     <div class="container-login100-form-btn">

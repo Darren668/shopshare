@@ -33,7 +33,6 @@ public class CheckServiceImpl {
             throw new RuntimeException(StatusCode.WrongPassword.getMsg());
         }
         return user;
-
     }
 
     /**check if the email has been registered*/
@@ -53,6 +52,12 @@ public class CheckServiceImpl {
     public void checkNewPassword(String email, String password1, String password2) throws Exception{
         if(StringUtils.isBlank(email) || StringUtils.isBlank(password1) ||StringUtils.isBlank(password2)){
             throw new RuntimeException(StatusCode.RegisterInformationNotBlank.getMsg());
+        }
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("email", email);
+        User user = userService.getOne(queryWrapper);
+        if(user == null){
+            throw new RuntimeException(StatusCode.EmailNotExisted.getMsg());
         }
         if(!password1.equals(password2)){
             throw new RuntimeException(StatusCode.PasswordNotSame.getMsg());

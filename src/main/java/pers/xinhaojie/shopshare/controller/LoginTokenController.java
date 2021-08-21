@@ -47,7 +47,7 @@ public class LoginTokenController {
         }
         ResponseData<Object> responseData = new ResponseData<>(StatusCode.Success);
         try {
-            String accessToken = tokenService.loginAndCreateToken(email, password);
+            String accessToken = tokenService.loginAndCreateToken(new User());
             responseService.setKeyValueInHeader(response,"accessToken", accessToken);
             //test in postman
             responseData.setData(accessToken);

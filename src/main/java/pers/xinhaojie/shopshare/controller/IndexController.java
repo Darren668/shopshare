@@ -3,6 +3,10 @@ package pers.xinhaojie.shopshare.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pers.xinhaojie.shopshare.entity.User;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author xin haojie
@@ -11,11 +15,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class IndexController {
 
-//    @RequestMapping("/")
-//    public String toMainPage(){
-//        return "main";
-//    }
-
+    @RequestMapping("/")
+    public String toIndexPage(HttpServletRequest request){
+        //check the accessToken
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        if(user != null){
+            session.setAttribute("user",user);
+        }
+        return "index";
+    }
+    @RequestMapping("main")
+    public String toMainPage(){
+        return "main";
+    }
     @RequestMapping("loginPage")
     public String toLoginPage(){
         return "login";
@@ -27,7 +40,7 @@ public class IndexController {
     }
 
     //update the password
-    @RequestMapping(value = "forgetPasswordPage")
+    @RequestMapping(value = "updatePassPage")
     public String updatePassword(){
         return "updatePass";
     }

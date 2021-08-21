@@ -1,5 +1,6 @@
 package pers.xinhaojie.shopshare.service;
 
+import pers.xinhaojie.shopshare.entity.User;
 import pers.xinhaojie.shopshare.response.ResponseData;
 
 /**
@@ -10,10 +11,12 @@ public interface TokenService {
 
 
     /**check login information and create token with email*/
-    public String loginAndCreateToken(String email, String password) throws Exception;
+    public String loginAndCreateToken(User user);
 
     /**resolve and check token with jwt*/
     public ResponseData resolveAndCheckToken(String token) throws Exception;
 
+    /**clear token in redis*/
+    public void removeTokenByKey(String key);
 
 }

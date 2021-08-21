@@ -17,8 +17,9 @@ public class MainController {
     /**
      * the main page
      * */
-    @RequestMapping ("/main")
+    @RequestMapping ("/auth/search")
     public String toMainPage(Model model){
-        return "main";
+
+        return "redirect:/main";
     }
 }
