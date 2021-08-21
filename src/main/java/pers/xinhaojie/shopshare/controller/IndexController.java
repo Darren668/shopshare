@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class IndexController {
 
+//    @RequestMapping("/")
+//    public String toMainPage(){
+//        return "main";
+//    }
+
     @RequestMapping("loginPage")
     public String toLoginPage(){
         return "login";

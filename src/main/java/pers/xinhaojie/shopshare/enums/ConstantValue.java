@@ -20,4 +20,6 @@ public class ConstantValue {
 
     //prefix of redis key for token
     public static final String JWT_TOKEN_REDIS_KEY_PREFIX="UserAuth:JWT:Key:";
+
+    public static final Integer SESSION_EXPIRE_TIME = 3600;
 }

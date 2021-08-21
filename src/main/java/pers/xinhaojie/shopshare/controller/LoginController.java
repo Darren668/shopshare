@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import pers.xinhaojie.shopshare.entity.User;
+import pers.xinhaojie.shopshare.enums.ConstantValue;
 import pers.xinhaojie.shopshare.enums.StatusCode;
 import pers.xinhaojie.shopshare.response.ResponseData;
 import pers.xinhaojie.shopshare.service.TokenService;
@@ -57,7 +58,9 @@ public class LoginController {
         }
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        return "redirect:main";
+        //set expire time of session is 1 hour
+        session.setMaxInactiveInterval(ConstantValue.SESSION_EXPIRE_TIME);
+        return "index";
     }
 
     //register
@@ -77,7 +80,9 @@ public class LoginController {
         //after register and then redirect to main
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        return "redirect:main";
+        //set expire time of session is 1 hour
+        session.setMaxInactiveInterval(ConstantValue.SESSION_EXPIRE_TIME);
+        return "index";
     }
 
     @RequestMapping(value = "update/password")
