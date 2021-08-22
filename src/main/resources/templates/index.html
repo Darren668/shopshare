@@ -10,6 +10,7 @@
     <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/login_main.css}">-->
     <!-- Bootstrap core CSS -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/index.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -37,21 +38,34 @@
                 <a th:href="@{/auth/search}"><button type="button" class="btn btn-default">SearchTest</button></a>
             </form>
 
-            <div class="nav navbar-nav navbar-right">
-                <div th:if="${session.user} == null" class="row center-block" style="margin-top: 7px">
-                    <a th:href="@{/loginPage}"><button type="button" class="btn btn-success">login</button></a>
-                    <a th:href="@{/registerPage}"><button type="button" class="btn btn-info">register</button></a>
-                </div>
-
-                <div class="btn-group" th:if="${session.user} != null" style="margin-top: 7px">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        [[${session.user.getUsername()}]] <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a th:href="@{/updatePassPage}">update password</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a th:href="@{/logout}">logout</a></li>
-                    </ul>
+            <div class="nav navbar-nav navbar-right" style="margin-top: 7px; float: right">
+                <!--initiate a order-->
+                <div class="row row justify-content-between">
+                    <div class="col-lg-5 col-md-5 col-sm-5" >
+                        <a th:href="@{/publishPage}">
+                            <button class="btn btn-warning">
+                            Initiate an order
+                            </button>
+                        </a>
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-sm-7 text-right" th:if="${session.user} == null" >
+                        <div>
+                            <a th:href="@{/loginPage}"><button type="button" class="btn btn-success">login</button></a>
+                            <a th:href="@{/registerPage}"><button type="button" class="btn btn-info">register</button></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-sm-7 text-right" th:if="${session.user} != null">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                [[${session.user.getUsername()}]] <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/updatePassPage}">update password</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a th:href="@{/logout}">logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><!-- /.navbar-collapse -->

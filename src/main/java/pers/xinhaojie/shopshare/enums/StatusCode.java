@@ -14,6 +14,10 @@ public enum StatusCode {
     RegisterInformationNotBlank(4001,"Username/password/email required"),
     UsernamePasswordNotBlank(4002,"Username and password required"),
     AccessTokenNotBlank(4003,"AccessToken required"),
+    TitleNotBlank(4004, "Title required"),
+    DescriptionNotBlank(4005, "Description required"),
+    DeadlineNotBlank(4006, "Deadline required"),
+
 
     EmailNotExisted(4049, "Email does not existed"),
     EmailExisted(4050, "Email has been used"),

@@ -1,8 +1,9 @@
-package pers.xinhaojie.shopshare.service.serviceImpl;
+package pers.xinhaojie.shopshare.utils;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import pers.xinhaojie.shopshare.entity.User;
 import pers.xinhaojie.shopshare.enums.StatusCode;
@@ -12,8 +13,8 @@ import pers.xinhaojie.shopshare.service.UserService;
  * @author xin haojie
  * @create 2021-08-13-22:45
  */
-@Service
-public class CheckServiceImpl {
+@Component
+public class CheckParamUtil {
 
     @Autowired
     UserService userService;
@@ -61,6 +62,19 @@ public class CheckServiceImpl {
         }
         if(!password1.equals(password2)){
             throw new RuntimeException(StatusCode.PasswordNotSame.getMsg());
+        }
+    }
+
+    /**check the param of shared order*/
+    public void checkSharedOrder(String title, String description, String deadline) throws Exception{
+        if(StringUtils.isBlank(title)){
+            throw new RuntimeException(StatusCode.TitleNotBlank.getMsg());
+        }
+        if(StringUtils.isBlank(description)){
+            throw new RuntimeException(StatusCode.DescriptionNotBlank.getMsg());
+        }
+        if(StringUtils.isBlank(deadline)){
+            throw new RuntimeException(StatusCode.DeadlineNotBlank.getMsg());
         }
     }
 

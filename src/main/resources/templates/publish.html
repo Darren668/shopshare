@@ -60,41 +60,60 @@
 
 
 </nav>
-<!-- public order  model -->
-
+<!-- order  model -->
 <div class="container-fluid order_detail">
     <div class="row center-block">
         <div class="col-lg-9 col-md-9 col-sm-12">
             <!--title-->
             <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Initiate a shared order</h2>
             <!--form to insert the discount information-->
-            <form action="">
+            <form th:action="@{/auth/publish}" th:method="post">
                 <div class="form-group">
-                    <label for="titleInput">Title</label>
-                    <input type="text" class="form-control" id="titleInput" placeholder="The order theme">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" th:value="${title}" name="title"
+                           placeholder="The order theme" th:onclick="test([[${session.user}]])">
                     <hr>
                 </div>
 
                 <div class="form-group">
-                    <label for="descriptionInput">Description</label>
-                    <textarea class="form-control" rows="7" id="descriptionInput" placeholder="Some details like : Total target price? How many people you want? "></textarea>
+                    <label for="description">Description</label>
+                    <textarea class="form-control" rows="5" id="description" th:value="${description}" name="description"
+                              placeholder="Some details like : Total target price? How many people you want? " th:onclick="test([[${session.user}]])">
+                    </textarea>
                     <hr>
                 </div>
 
                 <div class="form-group">
-                    <label for="screenshot">Screenshot</label>
-                    <input type="file" id="screenshot">
+                    <label for="photo">Screenshot</label>
+                    <input type="file" id="photoInServer" th:onclick="test([[${session.user}]])">
+                    <input type="text" id="photo" th:value="${photo}" th:onclick="test([[${session.user}]])" name="photo"
+                           placeholder="please input the photo file location">
                     <p class="help-block">If you have the discount information screenshot, you could share it here</p>
                     <hr>
                 </div>
 
                 <div class="form-group">
                     <label for="tags">Tags</label>
-                    <input type="text" class="form-control" id="tags" placeholder="please add the tags, use comma(,) to split two or more tags">
+                    <input type="text" class="form-control" id="tags" th:value="${tags}" name="tags"
+                           placeholder="please add the tags, use comma(,) to split two or more tags" th:onclick="test([[${session.user}]])">
+                    <hr>
+                </div>
+                <div class="form-group">
+                    <label for="deadline">Deadline</label>
+                    <input type="text" class="form-control" id="deadline" th:value="${deadline}" name="deadline"
+                           placeholder="eg. 2021-09-01 or 2021-09-01 14:30:00" th:onclick="test([[${session.user}]])">
                     <hr>
                 </div>
                 <div class="row btn-row">
-                    <div class="col">
+                    <div class="col-lg-8 col-md-4 col-sm-4" th:if="${msg} != null">
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong><p style="color: red" th:text="${msg}" ></p></strong>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4" style="float: right">
                         <button type="submit" class="btn btn-success btn-publish">Publish</button>
                     </div>
                 </div>
@@ -106,7 +125,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Title</div>
                 <div class="panel-body">
-                    choose a tile so that others could know what you want to buy or share
+                    choose a title so that others could know what you want to buy or share
                 </div>
             </div>
             <div class="panel panel-success">
@@ -124,18 +143,51 @@
             <div class="panel panel-warning">
                 <div class="panel-heading">Tags</div>
                 <div class="panel-body">
-                    choose a tile so that others could know what you want to buy or share
+                    choose a title so that others could know what you want to buy or share
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!--pop up warning message-->
+<!-- Modal -->
+<div class="modal fade" id="noUserWarning" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2>Please login first</h2>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><h4>Close</h4></button>
+                <a th:href="@{/loginPage}"><button type="button" class="btn btn-primary"><h4>Login</h4></button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
-
 <script th:src="@{/js/login_main.js}"></script>
 
+<script type="text/javascript">
+    function test(user) {
+        // alert("hello");
+        //alert(user);
+        //var user = session.getAttribute("user");
+        if(user == null){
+            $('#noUserWarning').modal('show');
+        }
+    }
 
+</script>
 </body>
+
+
 
 </html>

@@ -1,11 +1,7 @@
 package pers.xinhaojie.shopshare.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -14,18 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import pers.xinhaojie.shopshare.entity.User;
 import pers.xinhaojie.shopshare.enums.ConstantValue;
-import pers.xinhaojie.shopshare.enums.StatusCode;
-import pers.xinhaojie.shopshare.response.ResponseData;
 import pers.xinhaojie.shopshare.service.TokenService;
 import pers.xinhaojie.shopshare.service.UserService;
-import pers.xinhaojie.shopshare.service.serviceImpl.CheckServiceImpl;
+import pers.xinhaojie.shopshare.utils.CheckParamUtil;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import java.io.IOException;
 
 /**
@@ -42,7 +34,7 @@ public class LoginController {
     TokenService tokenService;
 
     @Autowired
-    CheckServiceImpl checkService;
+    CheckParamUtil checkService;
 
     //login
     @RequestMapping(value = "login", method = RequestMethod.POST)

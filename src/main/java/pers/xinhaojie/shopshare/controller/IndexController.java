@@ -17,12 +17,6 @@ public class IndexController {
 
     @RequestMapping("/")
     public String toIndexPage(HttpServletRequest request){
-        //check the accessToken
-        //        HttpSession session = request.getSession();
-        //        User user = (User)session.getAttribute("user");
-        //        if(user != null){
-        //            session.setAttribute("user",user);
-        //        }
         return "index";
     }
     @RequestMapping("main")

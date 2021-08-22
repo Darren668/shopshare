@@ -13,6 +13,7 @@ import pers.xinhaojie.shopshare.enums.ConstantValue;
 import pers.xinhaojie.shopshare.enums.StatusCode;
 import pers.xinhaojie.shopshare.response.ResponseData;
 import pers.xinhaojie.shopshare.service.TokenService;
+import pers.xinhaojie.shopshare.utils.CheckParamUtil;
 import pers.xinhaojie.shopshare.utils.JwtAndRedisUtil;
 
 import java.util.concurrent.TimeUnit;
@@ -26,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 public class TokenServiceImpl implements TokenService {
 
     @Autowired
-    CheckServiceImpl checkService;
+    CheckParamUtil checkService;
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
