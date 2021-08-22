@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>publish share order</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--    <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">-->
+    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/login_util.css}">-->
+    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/login_main.css}">-->
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/publish.css}" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">shopshare</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">shopshare</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search orders">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+                <a th:href="@{/auth/search}"><button type="button" class="btn btn-default">SearchTest</button></a>
+            </form>
+
+            <div class="nav navbar-nav navbar-right">
+                <div th:if="${session.user} == null" class="row center-block" style="margin-top: 7px">
+                    <a th:href="@{/loginPage}"><button type="button" class="btn btn-success">login</button></a>
+                    <a th:href="@{/registerPage}"><button type="button" class="btn btn-info">register</button></a>
+                </div>
+
+                <div class="btn-group" th:if="${session.user} != null" style="margin-top: 7px">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        [[${session.user.getUsername()}]] <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/updatePassPage}">update password</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/logout}">logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+
+
+</nav>
+<!-- public order  model -->
+
+<div class="container-fluid order_detail">
+    <div class="row center-block">
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <!--title-->
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Initiate a shared order</h2>
+            <!--form to insert the discount information-->
+            <form action="">
+                <div class="form-group">
+                    <label for="titleInput">Title</label>
+                    <input type="text" class="form-control" id="titleInput" placeholder="The order theme">
+                    <hr>
+                </div>
+
+                <div class="form-group">
+                    <label for="descriptionInput">Description</label>
+                    <textarea class="form-control" rows="7" id="descriptionInput" placeholder="Some details like : Total target price? How many people you want? "></textarea>
+                    <hr>
+                </div>
+
+                <div class="form-group">
+                    <label for="screenshot">Screenshot</label>
+                    <input type="file" id="screenshot">
+                    <p class="help-block">If you have the discount information screenshot, you could share it here</p>
+                    <hr>
+                </div>
+
+                <div class="form-group">
+                    <label for="tags">Tags</label>
+                    <input type="text" class="form-control" id="tags" placeholder="please add the tags, use comma(,) to split two or more tags">
+                    <hr>
+                </div>
+                <div class="row btn-row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-success btn-publish">Publish</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--instructions-->
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <h3>Instructions</h3>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Title</div>
+                <div class="panel-body">
+                    choose a tile so that others could know what you want to buy or share
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">Description</div>
+                <div class="panel-body">
+                    add more details like target price, how many people, the deadline for the promotion
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">Screenshot</div>
+                <div class="panel-body">
+                    if there is an photo to help others to understand your needs, upload it here
+                </div>
+            </div>
+            <div class="panel panel-warning">
+                <div class="panel-heading">Tags</div>
+                <div class="panel-body">
+                    choose a tile so that others could know what you want to buy or share
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+<script th:src="@{/js/login_main.js}"></script>
+
+
+</body>
+
+</html>

@@ -18,11 +18,11 @@ public class IndexController {
     @RequestMapping("/")
     public String toIndexPage(HttpServletRequest request){
         //check the accessToken
-        HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("user");
-        if(user != null){
-            session.setAttribute("user",user);
-        }
+        //        HttpSession session = request.getSession();
+        //        User user = (User)session.getAttribute("user");
+        //        if(user != null){
+        //            session.setAttribute("user",user);
+        //        }
         return "index";
     }
     @RequestMapping("main")
@@ -43,5 +43,11 @@ public class IndexController {
     @RequestMapping(value = "updatePassPage")
     public String updatePassword(){
         return "updatePass";
+    }
+
+    //public page
+    @RequestMapping(value = "publishPage")
+    public String toPublishPage(){
+        return "publish";
     }
 }
