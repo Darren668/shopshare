@@ -85,16 +85,13 @@
             <hr>
             <div class="media" th:each="order : ${orderList}">
                 <div class="media-left">
-                    <a th:href="@{/order}">
+                    <a href="#">
                         <img class="media-object thumbnail" th:src="@{/images/login_cart.jpg}" alt="screenshot">
                     </a>
                 </div>
                 <div class="media-body">
-                    <h2 class="media-heading"><a th:href="@{/order}">[[${order.getTitle()}]]</a></h2>
-                    <Strong>Description</Strong>
-                    <p th:text="${order.getDescription()}" ></p>
-                    <Strong>Deadline</Strong>
-                    <p th:text="${order.getDeadline()}"></p>
+                    <h2 class="media-heading"><a th:href="@{/order}">[[${order.get}}]]</a></h2>
+                    need three people to buy things in waitrose
                 </div>
             </div>
 

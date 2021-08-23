@@ -1,12 +1,9 @@
 package pers.xinhaojie.shopshare;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
-import pers.xinhaojie.shopshare.entity.Order;
 import pers.xinhaojie.shopshare.entity.SharedOrder;
 import pers.xinhaojie.shopshare.service.OrderService;
 
