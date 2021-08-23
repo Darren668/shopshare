@@ -1,17 +1,15 @@
 package pers.xinhaojie.shopshare.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pers.xinhaojie.shopshare.entity.SharedOrder;
-import pers.xinhaojie.shopshare.entity.User;
 import pers.xinhaojie.shopshare.service.OrderService;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -25,9 +23,14 @@ public class IndexController {
     OrderService orderService;
 
     @RequestMapping("/")
-    public String toIndexPage(Model model){
-        List<SharedOrder> orderList = orderService.list();
-        model.addAttribute("orderList", orderList);
+    public String toIndexPage(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,  Model model){
+        PageHelper.startPage(pageNum, 3);
+        QueryWrapper<SharedOrder> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("id");
+        List<SharedOrder> orderList = orderService.list(wrapper);
+        //model.addAttribute("orderList", orderList);
+        PageInfo<SharedOrder> pageInfo = new PageInfo<>(orderList);
+        model.addAttribute("pageInfo", pageInfo);
         return "index";
     }
     @RequestMapping("main")

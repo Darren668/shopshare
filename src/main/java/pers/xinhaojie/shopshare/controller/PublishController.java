@@ -1,5 +1,7 @@
 package pers.xinhaojie.shopshare.controller;
 
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +48,7 @@ public class PublishController {
         model.addAttribute("deadline", deadline);
         //check the param
         try {
-            checkParamUtil.checkSharedOrder(title, description, deadline);
+            checkParamUtil.checkSharedOrder(title, description);
         } catch (Exception e) {
             model.addAttribute("msg", e.getMessage());
             return "publish";
@@ -54,7 +56,9 @@ public class PublishController {
         HttpSession session = request.getSession();
         //new sharedorder
         User user = (User)session.getAttribute("user");
-        SharedOrder sharedOrder = new SharedOrder(null, title.trim(), description.trim(), photo.trim(), tags.trim(), deadline.trim(), user.getId(), null, null);
+        //deal with the deadline, set the default value as Anytime
+        deadline = StringUtils.isBlank(deadline.trim()) ? "Anytime" : deadline.trim();
+        SharedOrder sharedOrder = new SharedOrder(null, title.trim(), description.trim(), photo.trim(), tags.trim(), deadline, user.getId(), null, null);
         //insert new order into database
         orderService.save(sharedOrder);
         return "redirect:/";

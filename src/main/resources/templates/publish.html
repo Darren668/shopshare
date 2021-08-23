@@ -11,61 +11,19 @@
     <!-- Bootstrap core CSS -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/css/publish.css}" rel="stylesheet">
+    <link th:href="@{/css/common.css}" rel="stylesheet">
 </head>
 
 <body>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">shopshare</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" th:href="@{/}">shopshare</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search orders">
-                </div>
-                <button type="submit" class="btn btn-default">Search</button>
-                <a th:href="@{/auth/search}"><button type="button" class="btn btn-default">SearchTest</button></a>
-            </form>
-
-            <div class="nav navbar-nav navbar-right">
-                <div th:if="${session.user} == null" class="row center-block" style="margin-top: 7px">
-                    <a th:href="@{/loginPage}"><button type="button" class="btn btn-success">login</button></a>
-                    <a th:href="@{/registerPage}"><button type="button" class="btn btn-info">register</button></a>
-                </div>
-
-                <div class="btn-group" th:if="${session.user} != null" style="margin-top: 7px">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        [[${session.user.getUsername()}]] <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a th:href="@{/updatePassPage}">update password</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a th:href="@{/logout}">logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-
-
-</nav>
+<!--nav-->
+<div th:insert="~{common :: nav}"></div>
 <!-- order  model -->
 <div class="container-fluid order_detail">
     <div class="row center-block">
         <div class="col-lg-9 col-md-9 col-sm-12">
             <!--title-->
-            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Initiate a shared order</h2>
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Initiate a shared order</h2>
+            <hr>
             <!--form to insert the discount information-->
             <form th:action="@{/auth/publish}" th:method="post">
                 <div class="form-group">
@@ -77,7 +35,7 @@
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" rows="5" id="description" th:value="${description}" name="description"
+                    <textarea class="form-control" rows="5" id="description" th:text="${description}" name="description"
                               placeholder="Some details like : Total target price? How many people you want? " th:onclick="test([[${session.user}]])">
                     </textarea>
                     <hr>
@@ -121,7 +79,8 @@
         </div>
         <!--instructions-->
         <div class="col-lg-3 col-md-3 col-sm-12">
-            <h3>Instructions</h3>
+            <h2><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> Instructions </h2>
+            <hr>
             <div class="panel panel-primary">
                 <div class="panel-heading">Title</div>
                 <div class="panel-body">

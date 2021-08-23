@@ -1,0 +1,18 @@
+
+/*body*/
+body{
+    background-color: #efefef;
+}
+
+
+/*right nav*/
+.navbar{
+
+}
+.navbar-right{
+    margin-top: 7px;
+    float: right;
+}
+.navbar-right .btn{
+    margin: 1px;
+}

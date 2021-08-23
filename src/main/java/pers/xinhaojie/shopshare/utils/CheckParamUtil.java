@@ -66,16 +66,14 @@ public class CheckParamUtil {
     }
 
     /**check the param of shared order*/
-    public void checkSharedOrder(String title, String description, String deadline) throws Exception{
+    public void checkSharedOrder(String title, String description ) throws Exception{
         if(StringUtils.isBlank(title)){
             throw new RuntimeException(StatusCode.TitleNotBlank.getMsg());
         }
         if(StringUtils.isBlank(description)){
             throw new RuntimeException(StatusCode.DescriptionNotBlank.getMsg());
         }
-        if(StringUtils.isBlank(deadline)){
-            throw new RuntimeException(StatusCode.DeadlineNotBlank.getMsg());
-        }
+
     }
 
 

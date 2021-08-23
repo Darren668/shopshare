@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="nav">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">shopshare</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" th:href="@{/}">ShopShare</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search orders">
+                    </div>
+                    <button type="submit" class="btn btn-default">Search</button>
+                    <a th:href="@{/auth/search}"><button type="button" class="btn btn-default">SearchTest</button></a>
+                </form>
+
+                <div class="nav navbar-nav navbar-right">
+                    <!--initiate a order-->
+                    <div class="row row justify-content-between">
+                        <div class="col-lg-5 col-md-5 col-sm-5" >
+                            <a th:href="@{/publishPage}">
+                                <button class="btn btn-warning">
+                                    Publish an shared order
+                                </button>
+                            </a>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7 text-right" th:if="${session.user} == null" >
+                            <div>
+                                <a th:href="@{/loginPage}"><button type="button" class="btn btn-success">login</button></a>
+                                <a th:href="@{/registerPage}"><button type="button" class="btn btn-info">register</button></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7 text-right" th:if="${session.user} != null">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    [[${session.user.getUsername()}]] <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a th:href="@{/user/orders}">manager my orders</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a th:href="@{/updatePassPage}">update password</a></li>
+                                    <li><a th:href="@{/logout}">logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+</body>
+</html>
