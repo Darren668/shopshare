@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>error</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/common.css}" rel="stylesheet">
+</head>
+
+<body>
+<!--nav-->
+<div th:insert="~{common :: nav}"></div>
+<!--carousel photos-->
+
+<!--order model-->
+<div class="container-fluid main">
+    <div class="row center-block">
+        <!--order list-->
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="jumbotron errorbg" >
+                <h2>Sorry! Something wrong happened here... </h2>
+                <p th:text="${errorMsg}"></p>
+                <p>
+                    <a class="btn btn-primary btn-lg" th:href="@{/}" role="button">Back home</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>

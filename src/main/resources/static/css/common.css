@@ -31,3 +31,8 @@ img {
     margin-top: -15px;
     background-color: white;
 }
+
+/*error*/
+.errorbg{
+    margin-top: 30px;
+}
