@@ -26,7 +26,7 @@ public class IndexController {
     public String toIndexPage(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,  Model model){
         PageHelper.startPage(pageNum, 3);
         QueryWrapper<SharedOrder> wrapper = new QueryWrapper<>();
-        wrapper.orderByDesc("id");
+        wrapper.orderByDesc("create_time");
         List<SharedOrder> orderList = orderService.list(wrapper);
         //model.addAttribute("orderList", orderList);
         PageInfo<SharedOrder> pageInfo = new PageInfo<>(orderList);
