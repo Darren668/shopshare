@@ -11,18 +11,7 @@
 }
 
 /*order model*/
-img {
 
-    width: 400px;
-    height: 200px;
-}
-.main{
-
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: -15px;
-    background-color: white;
-}
 
 /*pageInfo*/
 .totalCount{

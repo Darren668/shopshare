@@ -30,12 +30,12 @@
             <hr>
             <div class="media" th:each="order : ${pageInfo.getList()}">
                 <div class="media-left">
-                    <a th:href="@{/order}">
+                    <a th:href="@{'/order/'+${order.getId()}}">
                         <img class="media-object thumbnail" th:src="@{/images/login_cart.jpg}" alt="screenshot">
                     </a>
                 </div>
                 <div class="media-body">
-                    <h2 class="media-heading"><a th:href="@{/order}">[[${order.getTitle()}]]</a></h2>
+                    <h2 class="media-heading"><a th:href="@{'/order/'+${order.getId()}}">[[${order.getTitle()}]]</a></h2>
                     <Strong>Description</Strong>
                     <p th:text="${order.description}" ></p>
                     <Strong>Create Time</Strong>

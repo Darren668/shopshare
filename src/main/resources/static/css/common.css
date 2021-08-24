@@ -16,3 +16,18 @@ body{
 .navbar-right .btn{
     margin: 1px;
 }
+
+/*main body*/
+img {
+
+    width: 400px;
+    height: 200px;
+}
+
+.main{
+
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: -15px;
+    background-color: white;
+}

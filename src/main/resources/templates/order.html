@@ -10,7 +10,6 @@
     <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/login_main.css}">-->
     <!-- Bootstrap core CSS -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/css/index.css}" rel="stylesheet">
     <link th:href="@{/css/common.css}" rel="stylesheet">
 </head>
 
@@ -26,50 +25,14 @@
         <!--order list-->
         <div class="col-lg-9 col-md-9 col-sm-12">
             <!--title-->
-            <h2> <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Order List </h2>
-            <!--order show list-->
+            <h2> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> [[${order.title}]] </h2>
+            <span th:text="${}"></span>
             <hr>
-            <div class="media" th:each="order : ${orderList}">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="media-object thumbnail" th:src="@{/images/login_cart.jpg}" alt="screenshot">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h2 class="media-heading"><a th:href="@{/order}">[[${order.get}}]]</a></h2>
-                    need three people to buy things in waitrose
-                </div>
-            </div>
-
         </div>
 
         <!--instructions-->
         <div class="col-lg-3 col-md-3 col-sm-12">
             <h2>Introduction</h2>
-            <div class="panel panel-info">
-                <div class="panel-heading">ShopShare</div>
-                <div class="panel-body">
-                    A web application platform for Chinese students in UK to share the order to enjoy the promotion activity
-                </div>
-            </div>
-            <div class="panel panel-success">
-                <div class="panel-heading">What you can do?</div>
-                <div class="panel-body">
-                    <p>Search and find a shared order</p>
-                    <p>Join others or Initiate a shared order by yourself</p>
-                    <p>Social with others</p>
-                    <p>Know about the recent promotion activity</p>
-                </div>
-            </div>
-            <div class="panel panel-danger">
-                <div class="panel-heading">Promotion Sources</div>
-                <div class="panel-body">
-                    <p><a th:href="@{https://www.dealmoon.co.uk/}" target="_blank" >Dealmoon 英国省钱快报</a></p>
-                    <p><a th:href="@{https://www.honglingjin.co.uk}" target="_blank">RedScarf 红领巾</a></p>
-                    <p><a th:href="@{https://www.lookfantastic.com/}" target="_blank">LookFantastic 美妆促销</a></p>
-                    <p><a th:href="@{http://www.luisaviaroma.com/}" target="_blank">Luisa Via Roma 奢侈品促销</a></p>
-                </div>
-            </div>
         </div>
     </div>
 </div>

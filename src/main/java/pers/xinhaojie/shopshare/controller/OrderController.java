@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pers.xinhaojie.shopshare.entity.SharedOrder;
@@ -48,9 +49,12 @@ public class OrderController {
 
     //details show of each order
 
-    @RequestMapping(value = "order/detail")
-    public String showOrder(){
-
+    @RequestMapping(value = "order/{orderId}")
+    public String showOrder(@PathVariable(value = "orderId") Integer orderId, Model model){
+        QueryWrapper<SharedOrder> wrapper = new QueryWrapper<>();
+        wrapper.eq("id",orderId);
+        SharedOrder sharedOrder = orderService.getOne(wrapper);
+        model.addAttribute("order", sharedOrder);
         return "order";
     }
 }
