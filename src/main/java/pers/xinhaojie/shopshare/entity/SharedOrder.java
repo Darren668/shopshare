@@ -25,7 +25,7 @@ public class SharedOrder {
     private String photo;
     private String tags;
     private String deadline;
-    private Integer userId;
+    private Integer initiatorId;
     private Timestamp createTime;
     private Timestamp updateTime;
 }

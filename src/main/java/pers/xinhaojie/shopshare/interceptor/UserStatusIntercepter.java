@@ -1,11 +1,8 @@
 package pers.xinhaojie.shopshare.interceptor;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import pers.xinhaojie.shopshare.entity.User;
@@ -22,12 +19,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @author xin haojie
- * @create 2021-08-14-10:38
+ * @create 2021-08-24-18:19
  */
-
-@Slf4j
 @Component
-public class LoginTokenInterceptor implements HandlerInterceptor {
+public class UserStatusIntercepter implements HandlerInterceptor {
     @Autowired
     ResponseService responseService;
 
@@ -39,7 +34,6 @@ public class LoginTokenInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
         //get the token in header
         Cookie[] cookies = request.getCookies();
         ResponseData checkResult = null;
@@ -53,16 +47,9 @@ public class LoginTokenInterceptor implements HandlerInterceptor {
             }
         }
         HttpSession session = request.getSession();
-        //if the token is invalid, then redirect to login page
-        if (checkResult == null || !StatusCode.Success.getCode().equals(checkResult.getCode())) {
-            //if there is no token in cookie, redirect to login page
-            session.setAttribute("tokenMsg", "no user login or expired, please login in again");
-            response.sendRedirect(request.getContextPath() + "/loginPage");
-            return false;
-        }
         //resolve token and add the user into session if the token is still valid
         User user = (User) session.getAttribute("user");
-        if (user == null) {
+        if (checkResult != null && StatusCode.Success.getCode().equals(checkResult.getCode()) && user == null) {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("id", Integer.valueOf((String) checkResult.getData()));
             user = userService.getOne(queryWrapper);

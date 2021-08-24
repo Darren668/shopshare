@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pers.xinhaojie.shopshare.dto.SharedOrderDTO;
 import pers.xinhaojie.shopshare.entity.SharedOrder;
 import pers.xinhaojie.shopshare.entity.User;
 import pers.xinhaojie.shopshare.service.OrderService;
+import pers.xinhaojie.shopshare.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,6 +29,8 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+    @Autowired
+    UserService userService;
     //initiator manage order
 
     @RequestMapping(value = "user/orders")
@@ -37,7 +41,7 @@ public class OrderController {
         PageHelper.startPage(pageNum, 3);
         //find our the orders of initiator
         QueryWrapper<SharedOrder> wrapper = new QueryWrapper<>();
-        wrapper.eq("user_id", user.getId());
+        wrapper.eq("initiator_id", user.getId());
         wrapper.orderByDesc("create_time");
         List<SharedOrder> list = orderService.list(wrapper);
         PageInfo<SharedOrder> pageInfo = new PageInfo<>(list);
@@ -51,10 +55,18 @@ public class OrderController {
 
     @RequestMapping(value = "order/{orderId}")
     public String showOrder(@PathVariable(value = "orderId") Integer orderId, Model model){
-        QueryWrapper<SharedOrder> wrapper = new QueryWrapper<>();
-        wrapper.eq("id",orderId);
-        SharedOrder sharedOrder = orderService.getOne(wrapper);
-        model.addAttribute("order", sharedOrder);
+        //find the order
+        QueryWrapper<SharedOrder> orderQueryWrapper = new QueryWrapper<>();
+        orderQueryWrapper.eq("id",orderId);
+        SharedOrder sharedOrder = orderService.getOne(orderQueryWrapper);
+        //find the initiator
+        Integer initiatorId = sharedOrder.getInitiatorId();
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.eq("id", initiatorId);
+        User initiator = userService.getOne(userQueryWrapper);
+        //add the sharedOrderDTO into model
+        SharedOrderDTO sharedOrderDTO = new SharedOrderDTO(sharedOrder, initiator);
+        model.addAttribute("sharedOrderDTO", sharedOrderDTO);
         return "order";
     }
 }

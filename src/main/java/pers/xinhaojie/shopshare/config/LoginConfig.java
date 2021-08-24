@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pers.xinhaojie.shopshare.interceptor.LoginTokenInterceptor;
+import pers.xinhaojie.shopshare.interceptor.UserStatusIntercepter;
 
 /**
  * @author xin haojie
@@ -18,14 +19,14 @@ public class LoginConfig implements WebMvcConfigurer {
     @Autowired
     LoginTokenInterceptor loginTokenInterceptor;
 
+    @Autowired
+    UserStatusIntercepter userStatusIntercepter;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        InterceptorRegistration ir = registry.addInterceptor(loginTokenInterceptor);
-        ir.addPathPatterns("/auth/**");
+        InterceptorRegistration userAuthIr = registry.addInterceptor(loginTokenInterceptor);
+        userAuthIr.addPathPatterns("/auth/**");
+
+        InterceptorRegistration userStatusIr = registry.addInterceptor(userStatusIntercepter);
+        userStatusIr.addPathPatterns("/");
     }
-
-
-
-
-
 }
