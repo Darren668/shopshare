@@ -1,6 +1,8 @@
 package pers.xinhaojie.shopshare.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,13 +61,19 @@ public class OrderController {
         QueryWrapper<SharedOrder> orderQueryWrapper = new QueryWrapper<>();
         orderQueryWrapper.eq("id",orderId);
         SharedOrder sharedOrder = orderService.getOne(orderQueryWrapper);
+        //update view count in database
+        //sharedOrder.setViewCount(sharedOrder.getViewCount()+1);
+        UpdateWrapper<SharedOrder> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("id",orderId);
+        updateWrapper.set("view_count", sharedOrder.getViewCount()+1);
+        orderService.update(updateWrapper);
         //find the initiator
-        Integer initiatorId = sharedOrder.getInitiatorId();
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
-        userQueryWrapper.eq("id", initiatorId);
+        userQueryWrapper.eq("id", sharedOrder.getInitiatorId());
         User initiator = userService.getOne(userQueryWrapper);
         //add the sharedOrderDTO into model
-        SharedOrderDTO sharedOrderDTO = new SharedOrderDTO(sharedOrder, initiator);
+        SharedOrder newSharedOrder = orderService.getOne(orderQueryWrapper);
+        SharedOrderDTO sharedOrderDTO = new SharedOrderDTO(newSharedOrder, initiator);
         model.addAttribute("sharedOrderDTO", sharedOrderDTO);
         return "order";
     }

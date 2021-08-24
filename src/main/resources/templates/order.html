@@ -28,7 +28,8 @@
             <h2> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> [[${sharedOrderDTO.sharedOrder.title}]] </h2>
             Initiator : <span th:text="${sharedOrderDTO.initiator.username}"></span> |
             Create time : <span th:text="${#dates.format(sharedOrderDTO.sharedOrder.createTime,'dd MMMM yyyy')}"></span> |
-            Deadline : <span th:text="${sharedOrderDTO.sharedOrder.deadline}"></span>
+            Deadline : <span th:text="${sharedOrderDTO.sharedOrder.deadline}"></span> |
+            viewCount : <span th:text="${sharedOrderDTO.sharedOrder.viewCount}"></span>
             <hr>
         </div>
 

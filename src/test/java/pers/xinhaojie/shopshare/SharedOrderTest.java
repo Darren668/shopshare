@@ -22,8 +22,8 @@ public class SharedOrderTest {
         // deadline, user_id, create_time, update_time) value
         // (null, 'waitrose 100-20', 'need students to',
         // 'images/waitrose.jpg', 'supermarket' , '2021-09-01 00:00:00', 1, null, null);";
-        SharedOrder sharedOrder = new SharedOrder(null, "waitrose 100-20", "need students", "images/waitrose.jpg", "supermarket", null, 1, null, null);
-        SharedOrder sharedOrder2 = new SharedOrder(null, "waitrose 100-20", "need students", "images/waitrose.jpg", "supermarket", "", 1, null, null);
+        SharedOrder sharedOrder = new SharedOrder("waitrose 100-20", "need students", "images/waitrose.jpg", "supermarket", null, 1);
+        SharedOrder sharedOrder2 = new SharedOrder( "waitrose 100-20", "need students", "images/waitrose.jpg", "supermarket", "", 1);
         orderService.save(sharedOrder2);
     }
     
