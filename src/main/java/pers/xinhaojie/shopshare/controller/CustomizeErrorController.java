@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import pers.xinhaojie.shopshare.enums.StatusCode;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,10 +27,10 @@ public class CustomizeErrorController implements ErrorController {
     public ModelAndView errorHtml(HttpServletRequest request, Model model) {
         HttpStatus status = this.getStatus(request);
         if(status.is4xxClientError()){
-            model.addAttribute("errorMsg","your request is invalid, please check it");
+            model.addAttribute("errorMsg", StatusCode.URLRequestNotValid.getMsg());
         }
         if(status.is5xxServerError()){
-            model.addAttribute("errorMsg","the server runs away, please try again");
+            model.addAttribute("errorMsg",StatusCode.ServerNotWork.getMsg());
         }
         return new ModelAndView("error");
     }

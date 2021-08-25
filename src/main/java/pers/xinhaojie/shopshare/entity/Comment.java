@@ -19,11 +19,16 @@ public class Comment {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private Integer parentId;
-    private Byte type;
+    private Integer type;
     private Integer commenterId;
     private Integer likeCount;
     private String content;
     private Timestamp createTime;
     private Timestamp updateTime;
-
+    public Comment (Integer parentId, Integer type, Integer commenterId, String content){
+        this.parentId = parentId;
+        this.type = type;
+        this.commenterId = commenterId;
+        this.content = content;
+    }
 }

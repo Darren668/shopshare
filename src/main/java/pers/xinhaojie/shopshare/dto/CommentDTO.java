@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CommentDTO {
     private Integer parentId;
-    private Byte type;
+    private Integer type;
     private  Integer commenterId;
     private String content;
 }

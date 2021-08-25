@@ -3,7 +3,9 @@ package pers.xinhaojie.shopshare.response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import netscape.security.UserTarget;
 import pers.xinhaojie.shopshare.enums.StatusCode;
+import pers.xinhaojie.shopshare.exception.CustomizeException;
 
 import java.io.Serializable;
 
@@ -34,5 +36,15 @@ public class ResponseData <T> implements Serializable {
     public ResponseData(StatusCode statusCode) {
         this.code = statusCode.getCode();
         this.msg = statusCode.getMsg();
+    }
+
+    public static ResponseData fail(StatusCode statusCode){
+        return new ResponseData(statusCode);
+    }
+    public static ResponseData fail(CustomizeException e){
+        return new ResponseData(e.getCode(),e.getMsg());
+    }
+    public static ResponseData success(StatusCode statusCode){
+        return new ResponseData(statusCode);
     }
 }

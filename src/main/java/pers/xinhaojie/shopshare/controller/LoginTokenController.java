@@ -43,7 +43,7 @@ public class LoginTokenController {
     @RequestMapping(value = "token/email/pass", method = RequestMethod.POST)
     public ResponseData<Object> loginAndSetToken(@RequestParam String email, @RequestParam String password, HttpServletResponse response) {
         if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
-            return new ResponseData<>(StatusCode.UsernamePasswordNotBlank);
+            return new ResponseData<>(StatusCode.UsernamePasswordBlank);
         }
         ResponseData<Object> responseData = new ResponseData<>(StatusCode.Success);
         try {
