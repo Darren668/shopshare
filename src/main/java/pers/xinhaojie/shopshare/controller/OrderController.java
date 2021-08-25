@@ -72,8 +72,7 @@ public class OrderController {
         userQueryWrapper.eq("id", sharedOrder.getInitiatorId());
         User initiator = userService.getOne(userQueryWrapper);
         //add the sharedOrderDTO into model
-        SharedOrder newSharedOrder = orderService.getOne(orderQueryWrapper);
-        SharedOrderDTO sharedOrderDTO = new SharedOrderDTO(newSharedOrder, initiator);
+        SharedOrderDTO sharedOrderDTO = new SharedOrderDTO(sharedOrder, initiator);
         model.addAttribute("sharedOrderDTO", sharedOrderDTO);
         return "order";
     }
