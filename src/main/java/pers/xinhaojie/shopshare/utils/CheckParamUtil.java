@@ -1,8 +1,7 @@
 package pers.xinhaojie.shopshare.utils;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.sun.org.apache.xpath.internal.operations.Or;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pers.xinhaojie.shopshare.entity.Comment;
@@ -116,7 +115,7 @@ public class CheckParamUtil {
             throw new CustomizeException(StatusCode.CommenterIdBlank);
         }
         //check the content
-        if(StringUtils.isBlank(comment.getContent()) || "".equals(comment.getContent())){
+        if(StringUtils.isBlank(comment.getContent())){
             throw new CustomizeException(StatusCode.CommentContentBlank);
         }
     }

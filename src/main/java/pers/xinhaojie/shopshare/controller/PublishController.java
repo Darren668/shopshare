@@ -58,7 +58,8 @@ public class PublishController {
         User user = (User)session.getAttribute("user");
         //deal with the deadline, set the default value as Anytime
         deadline = StringUtils.isBlank(deadline.trim()) ? "Anytime" : deadline.trim();
-        SharedOrder sharedOrder = new SharedOrder(title.trim(), description.trim(), photo.trim(), tags.trim(), deadline, user.getId());
+        photo = StringUtils.isBlank(photo.trim()) ? "/images/login_cart.jpg" : photo.trim();
+        SharedOrder sharedOrder = new SharedOrder(title.trim(), description.trim(), photo, tags.trim(), deadline, user.getId());
         //insert new order into database
         orderService.save(sharedOrder);
         return "redirect:/";

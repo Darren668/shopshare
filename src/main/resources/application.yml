@@ -3,7 +3,7 @@ spring:
     username: root
     password: xhj0816
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/shopshare?useSSL=false
+    url: jdbc:mysql://localhost:3306/shopshare?useSSL=false&useUnicode=true&characterEncoding=utf8
 
 
     druid:

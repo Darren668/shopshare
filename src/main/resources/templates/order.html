@@ -13,7 +13,6 @@
     <link th:href="@{/css/common.css}" rel="stylesheet">
     <link th:href="@{/css/order.css}" rel="stylesheet">
 </head>
-
 <body>
 <!--nav-->
 <div th:insert="~{common :: nav}"></div>
@@ -22,6 +21,7 @@
 
 <!--order model-->
 <div class="container-fluid main">
+    <input name="rootUrl" id="rootUrl" type="hidden" th:value="${#request.getContextPath()}"/>
     <div class="row center-block">
         <!--order list-->
         <div class="col-lg-9 col-md-9 col-sm-12">
@@ -53,7 +53,7 @@
                 <div class="col-lg-10 col-md-10 col-sm-10 text-right">
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success" onclick="sendComment()">Send</button>
+                            <button type="submit" class="btn btn-success" th:onclick="sendComment()">Send</button>
                         </div>
                     </div>
                 </div>
