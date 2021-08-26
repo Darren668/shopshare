@@ -2,3 +2,32 @@
 textarea{
     margin-bottom: 10px;
 }
+
+.comment_area{
+    margin: 10px;
+    border-bottom: 1px dashed;
+}
+.name_content{
+    margin: 5px 0px;
+}
+
+/*.comment_under_bar{*/
+/*    margin-top: 30px;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+.comment_under_bar .icon{
+    margin-right: 5px   ;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.comment_under_bar .icon:hover{
+    color: #ac2925;
+}
+
+.comment_under_bar .under_bar_time{
+    margin-bottom: 5px;
+}
+
+

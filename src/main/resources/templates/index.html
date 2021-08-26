@@ -39,7 +39,7 @@
                     <Strong>Description</Strong>
                     <p th:text="${order.description}" ></p>
                     <Strong>Create Time</Strong>
-                    <p th:text="${#dates.format(order.createTime,'dd MMMM yyyy hh:mm:ss')}"></p>
+                    <p th:text="${#dates.format(order.createTime,'dd MM yyyy hh:mm:ss')}"></p>
                     <Strong>Deadline</Strong>
                     <p th:text="${order.deadline}"></p>
                 </div>
