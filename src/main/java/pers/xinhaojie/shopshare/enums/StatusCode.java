@@ -14,8 +14,11 @@ public enum StatusCode {
     //comment status code starts with 3000
     OrderNotFound(3001,"your target order has been removed, try another?"),
     TargetCommentBlank(3002,"your target comment id required"),
-    TargetCommentNotFound(3003,"you have to choose one comment to leave your message"),
+    TargetCommentNotFound(3003,"you target comment has been removed, please try another"),
     CommentTypeNotValid(3004,"Invalid comment type, it must be 1 or 2"),
+    TargetOrderNotFount(3005,"your target order has been removed, please try another"),
+    CommenterIdBlank(3006,"commenter id required"),
+    CommentContentBlank(3007,"commnet content required"),
 
 
     //login status code start with 4000

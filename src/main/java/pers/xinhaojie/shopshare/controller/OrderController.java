@@ -62,7 +62,6 @@ public class OrderController {
         orderQueryWrapper.eq("id",orderId);
         SharedOrder sharedOrder = orderService.getOne(orderQueryWrapper);
         //update view count in database
-        //sharedOrder.setViewCount(sharedOrder.getViewCount()+1);
         UpdateWrapper<SharedOrder> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("id",orderId);
         updateWrapper.set("view_count", sharedOrder.getViewCount()+1);

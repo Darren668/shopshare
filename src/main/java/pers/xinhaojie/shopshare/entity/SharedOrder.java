@@ -27,6 +27,7 @@ public class SharedOrder {
     private String deadline;
     private Integer initiatorId;
     private Integer viewCount;
+    private Integer commentCount;
     private Timestamp createTime;
     private Timestamp updateTime;
 

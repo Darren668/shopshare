@@ -19,6 +19,8 @@ import java.io.PrintWriter;
 
 
 /**
+ * return view and page, the error key is errorMsg
+ * return JSON , the error key is msg(defined in CustomizeException)
  * @author xin haojie
  * @create 2021-08-24-21:20
  */

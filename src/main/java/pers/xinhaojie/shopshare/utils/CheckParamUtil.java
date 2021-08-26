@@ -2,14 +2,17 @@ package pers.xinhaojie.shopshare.utils;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pers.xinhaojie.shopshare.entity.Comment;
+import pers.xinhaojie.shopshare.entity.SharedOrder;
 import pers.xinhaojie.shopshare.entity.User;
 import pers.xinhaojie.shopshare.enums.CommentTypeEnum;
 import pers.xinhaojie.shopshare.enums.StatusCode;
 import pers.xinhaojie.shopshare.exception.CustomizeException;
 import pers.xinhaojie.shopshare.service.CommentService;
+import pers.xinhaojie.shopshare.service.OrderService;
 import pers.xinhaojie.shopshare.service.UserService;
 
 /**
@@ -24,6 +27,9 @@ public class CheckParamUtil {
 
     @Autowired
     CommentService commentService;
+
+    @Autowired
+    OrderService orderService;
 
     /**check if the email or password is validate*/
     public User checkLoginInformation(String email, String password) throws Exception{
@@ -90,8 +96,13 @@ public class CheckParamUtil {
         if(comment.getType() == null || !CommentTypeEnum.containsType(comment.getType()) ){
             throw new CustomizeException(StatusCode.CommentTypeNotValid);
         }
+        //二级回复，所以根据请求的type分类判断，如果评论order那就去查找order，如果是评论其他人评论，那就去查找评论
         if(comment.getType().equals(CommentTypeEnum.ORDER.getType()) ){
             //comment to order
+            SharedOrder targetOrder = orderService.getOne(new QueryWrapper<SharedOrder>().eq("id", comment.getParentId()));
+            if(targetOrder == null){
+                throw new CustomizeException(StatusCode.TargetOrderNotFount);
+            }
         }else{
             //comment to comment
             //find the parent comment by id and check
@@ -99,6 +110,14 @@ public class CheckParamUtil {
             if(parentComment == null){
                 throw new CustomizeException(StatusCode.TargetCommentNotFound);
             }
+        }
+        //check the commenterId
+        if(comment.getCommenterId() == null){
+            throw new CustomizeException(StatusCode.CommenterIdBlank);
+        }
+        //check the content
+        if(StringUtils.isBlank(comment.getContent())){
+            throw new CustomizeException(StatusCode.CommentContentBlank);
         }
     }
 
