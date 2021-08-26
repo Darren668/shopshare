@@ -11,6 +11,7 @@
     <!-- Bootstrap core CSS -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/css/common.css}" rel="stylesheet">
+    <link th:href="@{/css/order.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -26,16 +27,64 @@
         <div class="col-lg-9 col-md-9 col-sm-12">
             <!--title-->
             <h2> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> [[${sharedOrderDTO.sharedOrder.title}]] </h2>
-            Initiator : <span th:text="${sharedOrderDTO.initiator.username}"></span> |
             Create time : <span th:text="${#dates.format(sharedOrderDTO.sharedOrder.createTime,'dd MMMM yyyy')}"></span> |
-            Deadline : <span th:text="${sharedOrderDTO.sharedOrder.deadline}"></span> |
+            Deadline : <span style="color: red" th:text="${sharedOrderDTO.sharedOrder.deadline}"></span> |
             viewCount : <span th:text="${sharedOrderDTO.sharedOrder.viewCount}"></span>
             <hr>
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <img th:src="${sharedOrderDTO.sharedOrder.getPhoto()}" alt="screenshot">
+                </div>
+                <div class="col-lg-2 col-md-2"></div>
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <h3><strong>Description</strong></h3>
+                    <p th:text="${sharedOrderDTO.sharedOrder.getDescription()}"></p>
+                </div>
+            </div>
+            <hr>
+            <div class="row" >
+                <div class="col-lg-10 col-md-10 col-sm-10">
+                    <h3><Strong>Comments Welcome</Strong></h3>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10">
+                    <input id="order_id" type="hidden" th:value="${sharedOrderDTO.sharedOrder.getId()}">
+                    <textarea id="comment_content" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10 text-right">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success" onclick="sendComment()">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+
         </div>
 
         <!--instructions-->
         <div class="col-lg-3 col-md-3 col-sm-12">
-            <h2>Introduction</h2>
+            <h2><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span> Introduction </h2>
+            <hr>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Initiator</div>
+                <div class="panel-body">
+                    [[${sharedOrderDTO.initiator.username}]]
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">Email</div>
+                <div class="panel-body">
+                    [[${sharedOrderDTO.initiator.email}]]
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">Other sharers of this order</div>
+                <div class="panel-body">
+                    111
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -43,6 +92,7 @@
 <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/login_main.js}"></script>
+<script th:src="@{/js/order.js}"></script>
 
 
 </body>

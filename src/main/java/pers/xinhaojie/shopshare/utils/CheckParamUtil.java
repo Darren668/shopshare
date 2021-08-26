@@ -116,7 +116,7 @@ public class CheckParamUtil {
             throw new CustomizeException(StatusCode.CommenterIdBlank);
         }
         //check the content
-        if(StringUtils.isBlank(comment.getContent())){
+        if(StringUtils.isBlank(comment.getContent()) || "".equals(comment.getContent())){
             throw new CustomizeException(StatusCode.CommentContentBlank);
         }
     }
