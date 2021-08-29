@@ -5,21 +5,15 @@ textarea{
 
 .comment_area{
     margin: 10px;
-    border-bottom: 1px dashed;
+    /*border-bottom: 1px dashed;*/
 }
 .name_content{
     margin: 5px 0px;
 }
 
-/*.comment_under_bar{*/
-/*    margin-top: 30px;*/
-/*    margin-bottom: 10px;*/
-/*}*/
-
 .comment_under_bar .icon{
-    margin-right: 5px   ;
+    /*margin-right: 5px   ;*/
     cursor: pointer;
-    margin-bottom: 5px;
 }
 
 .comment_under_bar .icon:hover{
@@ -27,7 +21,14 @@ textarea{
 }
 
 .comment_under_bar .under_bar_time{
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
+}
+
+.white_board{
+    margin-top: 20px;
+}
+.send_button{
+    margin-bottom: 20px;
 }
 
 

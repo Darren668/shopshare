@@ -23,15 +23,22 @@
 <div class="container-fluid main">
     <input name="rootUrl" id="rootUrl" type="hidden" th:value="${#request.getContextPath()}"/>
     <div class="row center-block">
+
+
         <!--order list-->
         <div class="col-lg-9 col-md-9 col-sm-12">
             <!--title-->
-            <h2> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> [[${sharedOrderDTO.sharedOrder.title}]] </h2>
-            Create time : <span th:text="${#dates.format(sharedOrderDTO.sharedOrder.createTime,'dd MMMM yyyy')}"></span> |
-            Deadline : <span style="color: red" th:text="${sharedOrderDTO.sharedOrder.deadline}"></span> |
-            viewCount : <span th:text="${sharedOrderDTO.sharedOrder.viewCount}"></span>
-            <hr>
-            <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <h2><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                    [[${sharedOrderDTO.sharedOrder.title}]] </h2>
+                Create time : <span
+                    th:text="${#dates.format(sharedOrderDTO.sharedOrder.createTime,'dd MMMM yyyy')}"></span> |
+                Deadline : <span style="color: red" th:text="${sharedOrderDTO.sharedOrder.deadline}"></span> |
+                viewCount : <span th:text="${sharedOrderDTO.sharedOrder.viewCount}"></span>
+                <hr>
+            </div>
+            <!--<div class="row">-->
+            <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="col-lg-5 col-md-5 col-sm-12">
                     <img th:src="${sharedOrderDTO.sharedOrder.getPhoto()}" alt="screenshot">
                 </div>
@@ -40,44 +47,55 @@
                     <h3><strong>Description</strong></h3>
                     <p th:text="${sharedOrderDTO.sharedOrder.getDescription()}"></p>
                 </div>
+
             </div>
             <hr>
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <h3 th:text="${sharedOrderDTO.sharedOrder.commentCount}+' comments'"></h3>
-            </div>
-            <div class="row comment_area" th:each="comment : ${comments}">
-                <!--comments list-->
-                <div class="col-lg-12 col-md-12 col-sm-12 name_content">
-                    <Strong><span th:text="${comment.getUser().getUsername()}+' : '" ></span></Strong>
-                    <span th:text="${comment.getComment().getContent()}" ></span>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h3 th:text="${sharedOrderDTO.sharedOrder.commentCount}+' comments'"></h3>
                 </div>
-                <!--under bar-->
-                <div class="comment_under_bar">
-                    <div class="icon_area col-lg-6 col-md-6 col-sm-6">
-                        <span class="glyphicon glyphicon-thumbs-up icon" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-comment icon" aria-hidden="true"></span>
+                <!--list all the comments -->
+                <div class="comment_area" th:each="comment : ${comments}" >
+                    <!--comments list-->
+                    <div class="col-lg-12 col-md-12 col-sm-12 name_content">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        <Strong><span th:text="${comment.getUser().getUsername()}+' : '"></span></Strong>
+                        <span th:text="${comment.getComment().getContent()}"></span>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 under_bar_time">
+                    <!--under bar-->
+                    <div class="comment_under_bar">
+                        <div class="icon_area col-lg-6 col-md-6 col-sm-6">
+                            <div class="icon_area col-lg-2 col-md-2 col-sm-2">
+                                <span class="glyphicon glyphicon-thumbs-up icon" aria-hidden="true"></span>
+                            </div>
+                            <div class="icon_area col-lg-2 col-md-2 col-sm-2">
+                                <span class="glyphicon glyphicon-comment icon" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 under_bar_time">
                         <span
-                              th:text="${#dates.format(sharedOrderDTO.sharedOrder.createTime,'yyyy-MM-dd')}">
+                                th:text="${#dates.format(sharedOrderDTO.sharedOrder.createTime,'yyyy-MM-dd')}">
                         </span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <!--comment white board -->
-            <div class="col-lg-10 col-md-10 col-sm-10">
-                <input id="order_id" type="hidden" th:value="${sharedOrderDTO.sharedOrder.getId()}">
-                <textarea id="comment_content" class="form-control" rows="3"></textarea>
-            </div>
-            <div class="col-lg-10 col-md-10 col-sm-10 text-right">
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success" th:onclick="sendComment()">Send</button>
-                    </div>
-                </div>
-            </div>
-            <hr>
 
+                </div>
+                <!--comment white board -->
+                <div class="white_board col-lg-10 col-md-10 col-sm-10">
+                    <h4>Welcome to leave your question or any comments</h4>
+                    <input id="order_id" type="hidden" th:value="${sharedOrderDTO.sharedOrder.getId()}">
+                    <input id="commenter_id" type="hidden" th:value="${session.user.getId()}">
+                    <textarea id="comment_content" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10 text-right send_button">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success" th:onclick="sendComment()">Send</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
 

@@ -49,10 +49,8 @@ public class QueryUtil {
         Map<Integer, User> userMap = userList.stream().collect(Collectors.toMap(User::getId, user -> user));
 
         //pair the comment and user with the above map
-        List<CommentUserDTO> commentUserDTOList = commentList.stream().map(comment -> {
-            CommentUserDTO commentUserDTO = new CommentUserDTO(comment, userMap.get(comment.getCommenterId()));
-            return commentUserDTO;
-        }).collect(Collectors.toList());
+        List<CommentUserDTO> commentUserDTOList = commentList.stream().map(comment -> new CommentUserDTO(comment, userMap.get(comment.getCommenterId())))
+                .collect(Collectors.toList());
         return commentUserDTOList;
     }
 }
