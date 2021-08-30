@@ -53,7 +53,7 @@
                     <h3 th:text="${sharedOrderDTO.sharedOrder.commentCount}+' comments'"></h3>
                 </div>
                 <!--list all the comments -->
-                <div class="comment_area" th:each="comment : ${comments}" >
+                <div class="comment_area" th:each="comment : ${comments}">
                     <!--comments list-->
                     <div class="col-lg-12 col-md-12 col-sm-12 name_content">
                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -82,7 +82,8 @@
                 <div class="white_board col-lg-10 col-md-10 col-sm-10">
                     <h4>Welcome to leave your question or any comments</h4>
                     <input id="order_id" type="hidden" th:value="${sharedOrderDTO.sharedOrder.getId()}">
-                    <input id="commenter_id" type="hidden" th:value="${session.user == null ? '' : session.user.getId()}">
+                    <input id="commenter_id" type="hidden"
+                           th:value="${session.user == null ? '' : session.user.getId()}">
                     <textarea id="comment_content" class="form-control" rows="3"></textarea>
                 </div>
                 <div class="col-lg-10 col-md-10 col-sm-10 text-right send_button">
@@ -116,13 +117,29 @@
             <div class="panel panel-info">
                 <div class="panel-heading">Other sharers of this order</div>
                 <div class="panel-body">
-                    111
+                    <p th:each="joiner : ${joiners}">
+                        <Strong th:text="${joiner.getUsername()}"></Strong>
+                        <span th:text="${joiner.getEmail()}"></span>
+                    </p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row"
+                 th:if="${session.user!=null && session.user.getId()!=sharedOrderDTO.sharedOrder.getInitiatorId()}">
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    <a th:href="@{/user/join(orderId=${sharedOrderDTO.sharedOrder.getId()},userId=${session.user==null?'':session.user.getId()})}"><button class="btn btn-success">Join</button></a>
-                    <a th:href="@{user/quit(orderId=${sharedOrderDTO.sharedOrder.getId()},userId=${session.user==null?'':session.user.getId()})}"><button class="btn btn-danger">Quit</button></a>
+                    <a th:href="@{/auth/user/join(orderId=${sharedOrderDTO.sharedOrder.getId()},joinerId=${session.user==null?'':session.user.getId()})}">
+                        <button class="btn btn-success">Join</button>
+                    </a>
+                    <a th:href="@{/auth/user/quit(orderId=${sharedOrderDTO.sharedOrder.getId()},joinerId=${session.user==null?'':session.user.getId()})}">
+                        <button class="btn btn-danger">Quit</button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12" th:if="${msg} != null">
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong><span style="color: red" th:text="${msg}"></span></strong>
                 </div>
             </div>
         </div>

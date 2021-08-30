@@ -11,6 +11,10 @@ public enum StatusCode {
     Fail(404,"Failure"),
     InvalidParams(400,"Invalid parameters"),
 
+    //join exception status code
+    RepeatJoin(2001,"you have joined once, please don't join repeatly"),
+    UserNotInList(2002,"you have not joined in this order, please join first"),
+
     //comment status code starts with 3000
     OrderNotFound(3001,"your target order has been removed, try another?"),
     TargetCommentBlank(3002,"your target comment id required"),

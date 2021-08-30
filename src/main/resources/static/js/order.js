@@ -35,9 +35,7 @@ function sendComment() {
                     var isAccepted = confirm(data.msg);
                     if(isAccepted){
                         var loginPageUrl = $('#rootUrl').val()+"/loginPage";
-                        window.close();
-                        window.close();
-                        window.open(loginPageUrl);
+                        window.open(loginPageUrl,"_self");
                         //window.localStorage.setItem("toClose","true");
                     }
                 }else{

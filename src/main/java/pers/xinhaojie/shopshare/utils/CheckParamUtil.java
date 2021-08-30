@@ -5,14 +5,19 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pers.xinhaojie.shopshare.entity.Comment;
+import pers.xinhaojie.shopshare.entity.OrderJoiner;
 import pers.xinhaojie.shopshare.entity.SharedOrder;
 import pers.xinhaojie.shopshare.entity.User;
 import pers.xinhaojie.shopshare.enums.CommentTypeEnum;
 import pers.xinhaojie.shopshare.enums.StatusCode;
 import pers.xinhaojie.shopshare.exception.CustomizeException;
 import pers.xinhaojie.shopshare.service.CommentService;
+import pers.xinhaojie.shopshare.service.OrderJoinerService;
 import pers.xinhaojie.shopshare.service.OrderService;
 import pers.xinhaojie.shopshare.service.UserService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author xin haojie
@@ -29,6 +34,9 @@ public class CheckParamUtil {
 
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    OrderJoinerService orderJoinerService;
 
     /**check if the email or password is validate*/
     public User checkLoginInformation(String email, String password) throws Exception{
@@ -119,5 +127,29 @@ public class CheckParamUtil {
             throw new CustomizeException(StatusCode.CommentContentBlank);
         }
     }
+
+    /**check the param of join*/
+    public void checkJoinParam(Integer orderId, Integer userId){
+        //if there is a joiner, then exception
+        List<OrderJoiner> joinOrderList = orderJoinerService.list(new QueryWrapper<OrderJoiner>().eq("order_id", orderId));
+        List<Integer> userIdList = joinOrderList.stream().map(OrderJoiner::getJoinerId).collect(Collectors.toList());
+        if(userIdList.contains(userId)){
+            throw new RuntimeException(StatusCode.RepeatJoin.getMsg());
+        }
+
+    }
+
+    /**check the param of quit*/
+    public void checkQuitParam(Integer orderId, Integer userId){
+        //if there is a joiner, then exception
+        List<OrderJoiner> joinOrderList = orderJoinerService.list(new QueryWrapper<OrderJoiner>().eq("order_id", orderId));
+        List<Integer> userIdList = joinOrderList.stream().map(OrderJoiner::getJoinerId).collect(Collectors.toList());
+        if(!userIdList.contains(userId)){
+            throw new RuntimeException(StatusCode.UserNotInList.getMsg());
+        }
+
+    }
+
+
 
 }

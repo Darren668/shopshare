@@ -1,9 +1,7 @@
 package pers.xinhaojie.shopshare.controller;
 
-import com.alibaba.druid.sql.dialect.mysql.ast.expr.MySqlOrderingExpr;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 import pers.xinhaojie.shopshare.enums.StatusCode;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Collections;
-import java.util.Map;
 
 /**
  * springboot处理任何不适自定义的异常类
