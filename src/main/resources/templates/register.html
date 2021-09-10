@@ -37,6 +37,14 @@
                         <input class="input100" type="password" name="password" placeholder="please input password">
                         <span class="focus-input100"></span>
                     </div>
+                    <div class="flex-sb-m w-full p-b-30">
+                        <div>
+                            <a th:href="@{/loginPage}" class="txt1">To Login</a>
+                        </div>
+                        <div>
+                            <a th:href="@{/}" class="txt1">Back Home</a>
+                        </div>
+                    </div>
                     <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn">confirm</button>
