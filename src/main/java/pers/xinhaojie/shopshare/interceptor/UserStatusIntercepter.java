@@ -38,12 +38,14 @@ public class UserStatusIntercepter implements HandlerInterceptor {
         Cookie[] cookies = request.getCookies();
         ResponseData checkResult = null;
         String token = null;
-        for (Cookie cookie : cookies) {
-            if ("accessToken".equals(cookie.getName())) {
-                //get the cookie value and resolve
-                token = cookie.getValue();
-                checkResult = tokenService.resolveAndCheckToken(token);
-                break;
+        if(cookies != null && cookies.length > 0 ){
+            for (Cookie cookie : cookies) {
+                if ("accessToken".equals(cookie.getName())) {
+                    //get the cookie value and resolve
+                    token = cookie.getValue();
+                    checkResult = tokenService.resolveAndCheckToken(token);
+                    break;
+                }
             }
         }
         HttpSession session = request.getSession();
