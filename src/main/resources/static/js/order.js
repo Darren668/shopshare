@@ -27,7 +27,9 @@ function sendComment() {
                 // alert(data.msg);
                 //$('#comment_content').hide();
                 //refresh the window
-                window.location.reload();
+                var currentPage = $('#rootUrl').val()+"/order/"+order_id;
+                //window.location.reload();
+                window.open(currentPage,"_self");
             }else{
                 //no user information, redirect here(server would not work with ajax)
                 if(data.code == 4202){

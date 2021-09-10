@@ -11,7 +11,7 @@ spring:
       filters: stat,wall,slf4j
       filter:
         stat:
-          slow-sql-millis: 1000
+          slow-sql-millis: 5000
           log-slow-sql: true
           enabled: true
         wall:

@@ -51,9 +51,13 @@ public class ShowOrderUtil {
         //find all the joiners by orderId
         List<OrderJoiner> orderJoinerList = orderJoinerService.list(new QueryWrapper<OrderJoiner>().eq("order_id", orderId));
         List<Integer> joinerIdList = orderJoinerList.stream().map(OrderJoiner::getJoinerId).collect(Collectors.toList());
-        List<User> joinerList = userService.list(new QueryWrapper<User>().in("id", joinerIdList));
-        List<JoinerDTO> joinerDTOList = joinerList.stream().map(user -> new JoinerDTO(user.getId(), user.getUsername(), user.getEmail())).collect(Collectors.toList());
-        //save it or update the joiners in model
-        model.addAttribute("joiners", joinerDTOList);
+        if(joinerIdList.size() > 0){
+            List<User> joinerList = userService.list(new QueryWrapper<User>().in("id", joinerIdList));
+            List<JoinerDTO> joinerDTOList = joinerList.stream().map(user -> new JoinerDTO(user.getId(), user.getUsername(), user.getEmail())).collect(Collectors.toList());
+            //save it or update the joiners in model
+            model.addAttribute("joiners", joinerDTOList);
+        }
+
+
     }
 }

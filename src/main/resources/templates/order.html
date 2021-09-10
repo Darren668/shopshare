@@ -127,7 +127,7 @@
                  th:if="${session.user!=null && session.user.getId()!=sharedOrderDTO.sharedOrder.getInitiatorId()}">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <a th:href="@{/auth/user/join(orderId=${sharedOrderDTO.sharedOrder.getId()},joinerId=${session.user==null?'':session.user.getId()})}">
-                        <button class="btn btn-success">Join</button>
+                        <button class="btn btn-success btn-large">Join</button>
                     </a>
                     <a th:href="@{/auth/user/quit(orderId=${sharedOrderDTO.sharedOrder.getId()},joinerId=${session.user==null?'':session.user.getId()})}">
                         <button class="btn btn-danger">Quit</button>
