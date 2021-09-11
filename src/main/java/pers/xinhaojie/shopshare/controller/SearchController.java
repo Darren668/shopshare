@@ -37,13 +37,16 @@ public class SearchController {
         }
         model.addAttribute("searchTarget",searchTarget);
         //remove the + changed by springmvc
+        searchTarget = searchTarget.trim();
         String[] targets = searchTarget.replaceAll(" +", " ").split(" ");
         PageHelper.startPage(pageNum, 3);
         QueryWrapper<SharedOrder> orderQueryWrapper = new QueryWrapper<>();
+        StringBuilder sb = new StringBuilder();
+        sb.append("%");
         for(String key : targets){
-            orderQueryWrapper.like("title", key);
+            sb.append(key+"%");
         }
-        orderQueryWrapper.orderByDesc("create_time");
+        orderQueryWrapper.like("title",sb.toString()).orderByDesc("create_time");
         List<SharedOrder> orderList = orderService.list(orderQueryWrapper);
         PageInfo<SharedOrder> pageInfo = new PageInfo<>(orderList);
         model.addAttribute("pageInfo", pageInfo);
