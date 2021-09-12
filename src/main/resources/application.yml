@@ -1,9 +1,9 @@
 spring:
   datasource:
     username: root
-    password: xhj0816
+    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/shopshare?useSSL=false&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://8.208.97.185:3306/shopshare?useSSL=false&useUnicode=true&characterEncoding=utf8
 
 
     druid:
@@ -36,7 +36,7 @@ spring:
     time-zone: GMT+8
 
   redis:
-    host: localhost
+    host: 8.208.97.185
     port: 6379
     password:
 mybatis-plus:

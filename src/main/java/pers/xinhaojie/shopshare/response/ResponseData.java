@@ -3,7 +3,6 @@ package pers.xinhaojie.shopshare.response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import netscape.security.UserTarget;
 import pers.xinhaojie.shopshare.enums.StatusCode;
 import pers.xinhaojie.shopshare.exception.CustomizeException;
 

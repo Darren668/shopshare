@@ -1,19 +1,13 @@
 package pers.xinhaojie.shopshare.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pers.xinhaojie.shopshare.dto.CommentDTO;
 import pers.xinhaojie.shopshare.entity.Comment;
-import pers.xinhaojie.shopshare.entity.SharedOrder;
 import pers.xinhaojie.shopshare.entity.User;
-import pers.xinhaojie.shopshare.enums.CommentTypeEnum;
 import pers.xinhaojie.shopshare.enums.StatusCode;
 import pers.xinhaojie.shopshare.exception.CustomizeException;
 import pers.xinhaojie.shopshare.response.ResponseData;

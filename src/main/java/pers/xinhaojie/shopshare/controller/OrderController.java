@@ -2,7 +2,6 @@ package pers.xinhaojie.shopshare.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,24 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import pers.xinhaojie.shopshare.dto.CommentUserDTO;
-import pers.xinhaojie.shopshare.dto.JoinerDTO;
-import pers.xinhaojie.shopshare.dto.SharedOrderDTO;
-import pers.xinhaojie.shopshare.entity.OrderJoiner;
 import pers.xinhaojie.shopshare.entity.SharedOrder;
 import pers.xinhaojie.shopshare.entity.User;
-import pers.xinhaojie.shopshare.service.OrderJoinerService;
 import pers.xinhaojie.shopshare.service.OrderService;
-import pers.xinhaojie.shopshare.service.UserService;
-import pers.xinhaojie.shopshare.utils.CheckParamUtil;
-import pers.xinhaojie.shopshare.utils.QueryUtil;
 import pers.xinhaojie.shopshare.utils.ShowOrderUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author xin haojie
