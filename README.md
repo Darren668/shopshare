@@ -51,7 +51,7 @@ docker build -t shopshare .
 docker run -it --net=host --name shopshare -p 80:8080 -d shopshare
 ```
 
-Finally, you could get access the project by `http://server_ip` or `http://server_ip:80` on any browser.
+Finally, you could get access the project by `http://www.server_ip` or `http://www.server_ip:80` on any browser.
 
 The IP is not intuitive and you could buy a DNS service to map your domain to this address.
 
